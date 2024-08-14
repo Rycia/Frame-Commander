@@ -1,0 +1,10 @@
+## Interface: 100100
+## Version: v2023.6.15
+
+## Title: Frame Commander
+## Author: Rycia
+
+## Notes: Adds slash commands to open various interface frames.
+
+FrameCommander.lua
+##Locale.lua

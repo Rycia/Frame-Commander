@@ -1,0 +1,21 @@
+{
+    "Lua.diagnostics.globals": [
+        "SlashCmdList",
+        "ToggleCharacter",
+        "ToggleSpellBook",
+        "OpenWorldMap",
+        "ToggleTalentFrame",
+        "ToggleGuildFrame",
+        "ToggleCommunitiesFrame",
+        "OpenAllBags",
+        "ToggleFriendsFrame",
+        "ToggleHelpFrame",
+        "ToggleFramerate",
+        "BOOKTYPE_SPELL",
+        "BOOKTYPE_PROFESSION",
+        "BOOKTYPE_PET",
+        "WeeklyRewardsFrame",
+        "GameMenuFrame",
+        "CommunitiesFrame"
+    ]
+}
