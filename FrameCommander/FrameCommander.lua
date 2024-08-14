@@ -200,6 +200,6 @@ SLASH_ShowInterfaceVersion1,SLASH_ShowInterfaceVersion2,SLASH_ShowInterfaceVersi
 '/interfaceversion','/interfacever','/interfacenumber','/interfacenum','/uinum','/uinumber','/uiversion','/wowversion','/wowver','/wownum','/wownumber','/gameversion','/gamever';
 function SlashCmdList.ShowInterfaceVersion(msg, editbox)
  printMsgDebug("Showing WoW interface version.")
- printMsg("WoW version is \"", GetBuildInfo(),"\".")
+ printMsg("WoW version is ", GetBuildInfo(),".")
  ShowInterfaceVersion()
 end
