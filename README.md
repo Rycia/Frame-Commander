@@ -16,47 +16,49 @@ _Note: Some frames are protected by combat; those will not open if you are in co
 # Command List
 All of these have many alternate commands not listed here, eg. `/spellbook` and `/spells`.
 **If there's a command or other improvement not displayed here, contribute to the GitHub! I'm open to adding more!**
-> Talent Frame `/talents` 
+> Talent Frame `/talents`
 
-> Vault `/vault` 
+> Vault `/vault`
 
 > Achievements `/achievements`
 
-> Bags `/bags`, `/inventory` 
+> Bags `/bags`, `/inventory`
 
-> Character `/charecter`, `/char` 
+> Character `/charecter`, `/char`
 
-> Reputation `/reputation`, `/rep` 
+> Reputation `/reputation`, `/rep`
 
-> Currency `/currency`, `/money` 
+> Currency `/currency`, `/money`
 
-> Spellbook `/spells`, `/spellbook` 
+> Spellbook `/spells`, `/spellbook`
 
-> Professions `/professions`, `/profs` 
+> Professions `/professions`, `/profs`
 
 > Petbook `/petbook`, `/pets`
 
-> Map `/map`, `/worldmap` *(WARNING: Will open the map pane, but will not detect where you are. Even still, it will open the current map you are in; you just can't navigate to other maps without reopening it properly.)* 
+> Map `/map`, `/worldmap` *(WARNING: Will open the map pane, but will not detect where you are. Even still, it will open the current map you are in; you just can't navigate to other maps without reopening it properly.)*
 
-> Guild `/guild` 
+> Guild `/guild`
 
-> Guild Info `/guildinfo` 
+> Guild Info `/guildinfo`
 
-> Community `/community` 
+> Community `/community`
 
-> Game Menu `/gamemenu`, `/menu` 
+> Game Menu `/gamemenu`, `/menu`
 
-> PvP Menu `/pvpmenu` 
+> PvP Menu `/pvpmenu`
 
-> Friends `/friends` 
+> Friends `/friends`
 
-> Raid List `/raidlist` 
+> Raid List `/raidlist`
 
-> Customer Support `/customersupport`, `/support` 
+> Customer Support `/customersupport`, `/support`
 
 > Framerate `/fps`, `/framerate`
 > *(WARNING: May not properly show at all under certain UI's, such as ElvUI.)*
 
 > Keyring `/keyring` *(WARNING: Unsure what it is, but it exists within the API as a deprecated feature. Won't throw errors even if you try, but also won't work either.)*
+
+> Interface game version `/interfaceversion`, `/interfacenumber`, `/uinum`, `/wowver`, `/gameversion`
 
 **And more!**
