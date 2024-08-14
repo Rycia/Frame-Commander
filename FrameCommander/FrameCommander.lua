@@ -200,6 +200,10 @@ SLASH_ShowInterfaceVersion1,SLASH_ShowInterfaceVersion2,SLASH_ShowInterfaceVersi
 '/interfaceversion','/interfacever','/interfacenumber','/interfacenum','/uinum','/uinumber','/uiversion','/wowversion','/wowver','/wownum','/wownumber','/gameversion','/gamever';
 function SlashCmdList.ShowInterfaceVersion(msg, editbox)
  printMsgDebug("Showing WoW interface version.")
- printMsg("WoW version is ", GetBuildInfo(),".")
+ local WoWVersion1 = select(1, GetBuildInfo()) -- Readable version number
+ -- local WoWVersion2 = select(2, GetBuildInfo()) -- idk, not used
+ local WoWVersion3 = select(3, GetBuildInfo()) -- Date
+ local WoWVersion4 = select(4, GetBuildInfo()) -- Interface number
+ printMsg("WoW version is patch \"".. WoWVersion1 .. "\", released on \"" .. WoWVersion3 .. "\", with an addon interface number of \"".. WoWVersion4 .."\".")
  ShowInterfaceVersion()
 end
