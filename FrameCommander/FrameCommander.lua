@@ -207,3 +207,16 @@ function SlashCmdList.ShowInterfaceVersion(msg, editbox)
  printMsg("WoW version is patch \"".. WoWVersion1 .. "\", released on \"" .. WoWVersion3 .. "\", with an addon interface number of \"".. WoWVersion4 .."\".")
  ShowInterfaceVersion()
 end
+
+-- CLEAR HOTBARS
+SLASH_ClearHotbars1,SLASH_ClearHotbars2,SLASH_ClearHotbars3,SLASH_ClearHotbars4,SLASH_ClearHotbars5,SLASH_ClearHotbars6,SLASH_ClearHotbars7=
+'/clearbars','/clearbar','/clearhotbar','/clearhotbars','/clearhb','/wipehotbar','/wipehb';
+function SlashCmdList.ClearHotbars(msg, editbox)
+ printMsgDebug("Clearing hotbars.")
+ for i = 1,120 do
+    PickupAction(i)
+    PutItemInBackpack()
+    ClearCursor()
+    end
+ClearHotbars()
+end
