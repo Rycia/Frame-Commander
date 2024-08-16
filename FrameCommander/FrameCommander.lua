@@ -4,7 +4,7 @@ local function printMsg(message)
     print("[Frame Commander] "..message)
 end
 
-local debug = true
+local debug = false
 local function printMsgDebug(message)
 	if debug == true then
 		printMsg(message)
@@ -209,8 +209,8 @@ function SlashCmdList.ShowInterfaceVersion(msg, editbox)
 end
 
 -- CLEAR HOTBARS
-SLASH_ClearHotbars1,SLASH_ClearHotbars2,SLASH_ClearHotbars3,SLASH_ClearHotbars4,SLASH_ClearHotbars5,SLASH_ClearHotbars6,SLASH_ClearHotbars7=
-'/clearbars','/clearbar','/clearhotbar','/clearhotbars','/clearhb','/wipehotbar','/wipehb';
+SLASH_ClearHotbars1,SLASH_ClearHotbars2,SLASH_ClearHotbars3,SLASH_ClearHotbars4,SLASH_ClearHotbars5,SLASH_ClearHotbars6,SLASH_ClearHotbars7,SLASH_ClearHotbars8=
+'/clearbars','/clearbar','/clearhotbar','/clearhotbars','/clearhb','/wipehotbar','/wipehb','/wipebars';
 function SlashCmdList.ClearHotbars(msg, editbox)
  printMsgDebug("Clearing hotbars.")
  for i = 1,120 do

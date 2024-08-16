@@ -1,15 +1,11 @@
-### Adds category for saved equipment sets/gear sets while items of those sets are not equipped. Help prevent accidental deletion of items you use while sifting through gear!
-
-#### Requires [BetterBags](https://www.curseforge.com/wow/addons/better-bags).
+### Frame Commander simply adds slash commands to the game to open various frames, such as Talents, the Spellbook, your Vault, and more!
+#### This can partially replace the Microbar (menu bar), if you prefer to use slash commands as opposed to having an extra frame on your screen and several clicks between you and the frame you want to open.
+#### These commands are completely macroable and safe, so feel free to use them on your hotbar, too!
 
 *If you have issues or want to help contribute to this AddOn, please head over to GitHub with the link below.*
 [![GitHub](https://github.com/user-attachments/assets/36665467-3547-49bf-9c33-0095bd3bcb8b)](https://github.com/Rycia/Frame-Commander)
 [![CurseForge](https://github.com/user-attachments/assets/5feb4851-9320-4b27-a803-c12239ef6497)](https://legacy.curseforge.com/wow/addons/frame-commander)
 [![Ko-Fi](https://github.com/user-attachments/assets/8154cab9-c0f5-4095-85ca-529dee114052)](https://ko-fi.com/rycia)
-
-### Frame Commander simply adds slash commands to the game to open various frames, such as Talents, the Spellbook, your Vault, and more!
-#### This can partially replace the Microbar (menu bar), if you prefer to use slash commands as opposed to having an extra frame on your screen and several clicks between you and the frame you want to open.
-#### These commands are completely macroable and safe, so feel free to use them on your hotbar, too!
 
 _Note: Some frames are protected by combat; those will not open if you are in combat. Some frames are also featured but still protected (locked) by Blizzard. Regardless, these features are still present and will work in event that Blizzard decides to unrestrict them._
 
@@ -60,5 +56,7 @@ All of these have many alternate commands not listed here, eg. `/spellbook` and 
 > Keyring `/keyring` *(WARNING: Unsure what it is, but it exists within the API as a deprecated feature. Won't throw errors even if you try, but also won't work either.)*
 
 > Interface game version `/interfaceversion`, `/interfacenumber`, `/uinum`, `/wowver`, `/gameversion`
+
+> Reset hotbars `/resethotbars`, `/resethb`, `/clearhb`, `/clearbars`
 
 **And more!**
