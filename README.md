@@ -1,4 +1,5 @@
 ### Frame Commander simply adds slash commands to the game to open various frames, such as Talents, the Spellbook, your Vault, and more!
+
 #### This can partially replace the Microbar (menu bar), if you prefer to use slash commands as opposed to having an extra frame on your screen and several clicks between you and the frame you want to open.
 #### These commands are completely macroable and safe, so feel free to use them on your hotbar, too!
 
