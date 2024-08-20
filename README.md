@@ -50,13 +50,18 @@ All of these have many alternate commands not listed here, eg. `/spellbook` and 
 
 > Customer Support `/customersupport`, `/support`
 
-> Framerate `/fps`, `/framerate`
-> *(WARNING: May not properly show at all under certain UI's, such as ElvUI.)*
-
-> Keyring `/keyring` *(WARNING: Unsure what it is, but it exists within the API as a deprecated feature. Won't throw errors even if you try, but also won't work either.)*
+> Framerate `/fps`, `/framerate` *(WARNING: May not properly show at all under certain UI's, such as ElvUI.)*
 
 > Interface game version `/interfaceversion`, `/interfacenumber`, `/uinum`, `/wowver`, `/gameversion`
 
 > Reset hotbars `/resethotbars`, `/resethb`, `/clearhb`, `/clearbars`
+
+> Professions `/leatherworking`, `/mining`, `/skinning`, `/fishing` *(NOTE: This includes ALL the professions. There's many shortened variations to these commands, like the rest.)*
+
+> Hearthstone `/hearthstone`, `/hs`, `/hearth` *(NOTE: This selects any of the hearthstones randomly from your collection!.)*
+
+> Garrison Hearthstone `/garrison`, `/gs`, `/garrisonhearthstone`
+
+> Dalaran Hearthstone `/dalaran`, `/dalaranhearth`
 
 **And more!**
