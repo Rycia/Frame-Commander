@@ -59,7 +59,7 @@ All of these have many alternate commands not listed here, eg. `/spellbook` and 
 
 > Professions `/leatherworking`, `/mining`, `/skinning`, `/fishing` *(NOTE: This includes ALL the professions. There's many shortened variations to these commands, like the rest.)*
 
-> Hearthstone `/hearthstone`, `/hs`, `/hearth` *(NOTE: This selects any of the hearthstones randomly from your collection!.)*
+> Hearthstone `/hearthstone`, `/hs`, `/hearth` *(NOTE: This selects any of the hearthstones randomly from your collection!)*
 
 > Garrison Hearthstone `/garrison`, `/gs`, `/garrisonhearthstone`
 
