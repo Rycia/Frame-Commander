@@ -437,6 +437,7 @@ function SlashCmdList.Hearthstone(msg, editbox) -- Use a random hearthstone that
         printMsg("You do not have any usable hearthstones in your collection! Visit an Innkeeper in any major city and use the Hearthstone item in your bags to obtain one for your collection.")
     end
     clearChatbox()
+    Hearthstone()
 end
 
 -- GARRISON HEARTHSTONE
@@ -451,6 +452,7 @@ function SlashCmdList.UseGarrisonHearthstone(msg, editbox)
         printMsg("You do not have the Garrison Hearthstone in your collection! Go to your capital city and pick up the quests to start Warlords of Draenor and establish your garrison before you can use this.")
     end
     clearChatbox()
+    UseGarrisonHearthstone()
 end
 
 -- DALARAN HEARTHSTONE
@@ -465,4 +467,34 @@ function SlashCmdList.UseDalaranHearthstone(msg, editbox)
         printMsg("You do not have the Dalaran Hearthstone in your collection! Go to your capital city and pick up the quests to start Legion and get to Legion's Dalaran manually before you can use this. If you have lost your Dalaran Hearthstone, you can talk with Amisi Azuregaze at the Legerdemain Lounge of Dalaran to replace it and turn it into a toy.")
     end
     clearChatbox()
+    UseDalaranHearthstone()
+end
+
+-- LOCALIZE INTERFACE
+-- This makes it so that your interface settings is saved locally instead of on Blizzard servers.
+-- If you're prone to disconnects, you can lose UI Settings like moving your spells on your hotbars if it's not set to be local.
+SLASH_ToggleInterfaceLocal1, SLASH_ToggleInterfaceLocal2, SLASH_ToggleInterfaceLocal3, SLASH_ToggleInterfaceLocal4, SLASH_ToggleInterfaceLocal5 =
+'/interface local', '/ui local', '/localinterface', '/local interface', '/local ui';
+function SlashCmdList.ToggleInterfaceLocal(msg, editbox)
+ printMsgDebug("Setting your interface changes to be locally saved.")
+ SetCVar("synchronizeBindings", 0)
+ SetCVar("synchronizeChatFrames", 0)
+ SetCVar("synchronizeConfig", 0)
+ SetCVar("synchronizeMacros", 0)
+ SetCVar("synchronizeSettings", 0)
+ clearChatbox()
+ ToggleInterfaceLocal()
+end
+
+SLASH_ToggleInterfaceGlobal1, SLASH_ToggleInterfaceGlobal2, SLASH_ToggleInterfaceGlobal3, SLASH_ToggleInterfaceGlobal4, SLASH_ToggleInterfaceGlobal5 =
+'/interface global', '/ui global', '/globalinterface', '/global interface', '/global ui';
+function SlashCmdList.ToggleInterfaceGlobal(msg, editbox)
+ printMsgDebug("Setting your interface changes to be globally saved on Blizzard's servers.")
+ SetCVar("synchronizeBindings", 1)
+ SetCVar("synchronizeChatFrames", 1)
+ SetCVar("synchronizeConfig", 1)
+ SetCVar("synchronizeMacros", 1)
+ SetCVar("synchronizeSettings", 1)
+ clearChatbox()
+ ToggleInterfaceGlobal()
 end

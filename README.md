@@ -65,4 +65,5 @@ All of these have many alternate commands not listed here, eg. `/spellbook` and 
 
 > Dalaran Hearthstone `/dalaran`, `/dalaranhearth`
 
+> Interface Local/Global `/ui local`, `/interface global`, `/local interface`*(NOTE: This makes it so that your interface settings is saved locally instead of on Blizzard servers. If you're prone to disconnects, you can lose UI Settings like moving your spells on your hotbars or addon settings if it's not set to be local.)*
 **And more!**
