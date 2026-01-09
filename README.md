@@ -53,6 +53,8 @@ All of these have many alternate commands not listed here, eg. `/spellbook` and 
 
 > Framerate `/fps`, `/framerate` *(WARNING: May not properly show at all under certain UI's, such as ElvUI.)*
 
+> Ping `/testping`, `/pingparty`, `/pingraid` *(NOTE: Shows your ping, but the party and raid variants share your stats in the group you're in.)*
+
 > Interface game version `/interfaceversion`, `/interfacenumber`, `/uinum`, `/wowver`, `/gameversion`
 
 > Reset hotbars `/resethotbars`, `/resethb`, `/clearhb`, `/clearbars`

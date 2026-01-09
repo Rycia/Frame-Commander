@@ -11,19 +11,27 @@ local function printMsgDebug(message)
 	end
 end
 printMsgDebug("Debug mode is enabled. Please disable this in FrameCommander.lua to stop these messages.")
+
 -------------------------------------------------------
 local function clearChatbox() -- Chatbar text stays even if the command was entered, so clear the chatbox after.
-    if editbox then
-    editbox:SetText("")
-    end
+    C_Timer.After(0, function()
+        local editbox = ChatEdit_GetActiveWindow()
+        if editbox then
+            editbox:SetText("")
+            editbox:ClearFocus()
+        end
+    end)
 end
+
+
 -------------------------------------------------------
 -- CHARACTER
 SLASH_ToggleChar1, SLASH_ToggleChar2, SLASH_ToggleChar3, SLASH_ToggleChar4 =
 '/character', '/char', '/charecter', '/toon';
 function SlashCmdList.ToggleChar(msg, editbox)
  printMsgDebug("Toggling character frame.")
- ToggleCharacter("PaperDollFrame")
+ ToggleFrame(CharacterFrame)
+ CharacterFrame_ShowSubFrame("PaperDollFrame")
  clearChatbox()
 end
 
@@ -32,7 +40,8 @@ SLASH_ToggleRep1, SLASH_ToggleRep2, SLASH_ToggleRep3 =
 '/reputation', '/rep', '/reput';
 function SlashCmdList.ToggleRep(msg, editbox)
  printMsgDebug("Toggling reputation frame.")
- ToggleCharacter("ReputationFrame")
+ ToggleFrame(CharacterFrame)
+ CharacterFrame_ShowSubFrame("ReputationFrame")
  clearChatbox()
 end
 
@@ -40,8 +49,8 @@ end
 SLASH_ToggleCurrency1, SLASH_ToggleCurrency2, SLASH_ToggleCurrency3, SLASH_ToggleCurrency4, SLASH_ToggleCurrency5, SLASH_ToggleCurrency6 =
 '/currency', '/curr', '/cur', '/money', '/tokens', '/token';
 function SlashCmdList.ToggleCurrency(msg, editbox)
- printMsgDebug("Toggling currency frame.")
- ToggleCharacter("TokenFrame")
+ ToggleFrame(CharacterFrame)
+ CharacterFrame_ShowSubFrame("TokenFrame")
  clearChatbox()
 end
 
@@ -50,7 +59,7 @@ SLASH_ToggleSpellbook1, SLASH_ToggleSpellbook2, SLASH_ToggleSpellbook3, SLASH_To
 '/spells', '/spellbook', '/actionbook', '/actions', '/abilities';
 function SlashCmdList.ToggleSpellbook(msg, editbox)
  printMsgDebug("Toggling spellbook frame.")
- ToggleSpellBook(BOOKTYPE_SPELL)
+ SpellBookFrame_OpenToTab(SpellBookFrameTabButton1)
  clearChatbox()
 end
 
@@ -59,7 +68,7 @@ SLASH_ToggleSpellbookProf1, SLASH_ToggleSpellbookProf2, SLASH_ToggleSpellbookPro
 '/profs', '/profession', '/professions', '/profspells', '/profspellbook', '/professionspellbook', '/professionspells', '/prof';
 function SlashCmdList.ToggleSpellbookProf(msg, editbox)
  printMsgDebug("Toggling profession spellbook frame.")
- ToggleSpellBook(BOOKTYPE_PROFESSION)
+ SpellBookFrame_OpenToTab(SpellBookFrameTabButton2)
  clearChatbox()
 end
 
@@ -68,7 +77,7 @@ SLASH_ToggleSpellbookPets1, SLASH_ToggleSpellbookPets2, SLASH_ToggleSpellbookPet
 '/pets', '/petbook', '/spellbookpets', '/spellpets', '/petsspellbook', '/petsbook';
 function SlashCmdList.ToggleSpellbookPets(msg, editbox)
  printMsgDebug("Toggling profession spellbook frame.")
- ToggleSpellBook(BOOKTYPE_PET)
+ SpellBookFrame_OpenToTab(SpellBookFrameTabButton3)
  clearChatbox()
 end
 
@@ -77,7 +86,7 @@ SLASH_ToggleWorldMap1, SLASH_ToggleWorldMap2 =
 '/map', '/worldmap';
 function SlashCmdList.ToggleWorldMap(msg, editbox)
  printMsgDebug("Toggling world map frame.")
- OpenWorldMap()
+ ToggleWorldMapFrame()
  -- OpenWorldMap(mapID)
  -- obtainable through /dump GetInstanceInfo()
  -- ATM this can't get the current map so it can bug when trying to go into other maps. Still opens it.
@@ -89,7 +98,9 @@ SLASH_ToggleTalents1, SLASH_ToggleTalents2 =
 '/talents', '/talent';
 function SlashCmdList.ToggleTalents(msg, editbox)
  printMsgDebug("Toggling talents frame.")
- ToggleTalentFrame()
+ if PlayerSpellsFrame then
+    PlayerSpellsFrame:Toggle()
+ end
  clearChatbox()
 end
 
@@ -145,7 +156,7 @@ SLASH_TogglePVPFrame1,SLASH_TogglePVPFrame2=
 '/pvpframe','/pvpmenu';
 function SlashCmdList.TogglePVPFrame(msg, editbox)
  printMsgDebug("Toggling PvP frame.")
- TogglePVPFrame();
+ PVEFrame_ToggleFrame("PVP")
  clearChatbox()
 end
 
@@ -154,7 +165,7 @@ SLASH_ToggleBags1,SLASH_ToggleBags2,SLASH_ToggleBags3=
 '/bags','/bag','/inventory';
 function SlashCmdList.ToggleBags(msg, editbox)
  printMsgDebug("Toggling bag frame.")
- OpenAllBags()
+ ToggleAllBags()
  clearChatbox()
 end
 
@@ -190,7 +201,8 @@ SLASH_ToggleSupport1,SLASH_ToggleSupport2,SLASH_ToggleSupport3,SLASH_ToggleSuppo
 '/customersupport','/csupport','customers','customer','support','helpmeimdying';
 function SlashCmdList.ToggleSupport(msg, editbox)
  printMsgDebug("Toggling support frame.")
- ToggleHelpFrame()
+ ToggleHelpFrame() -- may fail
+ HelpFrame_Show()
  clearChatbox()
 end
 
@@ -203,15 +215,49 @@ function SlashCmdList.ToggleFPS(msg, editbox)
  clearChatbox()
 end
 
--- KEYRING
-SLASH_ToggleKeyringFrame1,SLASH_ToggleKeyringFrame2=
-'/keyring','/keyrings';
-function SlashCmdList.ToggleKeyringFrame(msg, editbox)
- printMsgDebug("Toggling keyring frame.")
- ToggleKeyRing()
- clearChatbox()
+-- PING / LATENCY
+SLASH_ShowPing1, SLASH_ShowPing2, SLASH_ShowPing3 =
+'/whatsmyping','/whatismyping','/testping';
+function SlashCmdList.ShowPing(msg, editbox)
+    printMsgDebug("Showing ping information.")
+    local _, _, home, world = GetNetStats()
+    printMsg("Your ping is "..home.." ms (Home), "..world.." ms (World)")
+    clearChatbox()
 end
 
+-- PING (PARTY)
+SLASH_PingParty1, SLASH_PingParty2=
+'/pingparty','/partyping';
+function SlashCmdList.PingParty(msg, editbox)
+    printMsgDebug("Sending ping to party.")
+    local _, _, home, world = GetNetStats()
+    if IsInGroup() and not IsInRaid() then
+        C_ChatInfo.SendChatMessage(
+            "[Frame commander] My ping is "..home.." ms (Home), "..world.." ms (World)",
+            "PARTY"
+        )
+    else
+        printMsg("You are not in a party.")
+    end
+    clearChatbox()
+end
+
+-- PING (RAID)
+SLASH_PingRaid1, SLASH_PingRaid2 =
+'/pingraid','/raidping';
+function SlashCmdList.PingRaid(msg, editbox)
+    printMsgDebug("Sending ping to raid.")
+    local _, _, home, world = GetNetStats()
+    if IsInRaid() then
+        C_ChatInfo.SendChatMessage(
+            "[Frame commander] My ping is "..home.." ms (Home), "..world.." ms (World)",
+            "RAID"
+        )
+    else
+        printMsg("You are not in a raid.")
+    end
+    clearChatbox()
+end
 
 -- ACHIEVEMENTS
 SLASH_ToggleAchievements1,SLASH_ToggleAchievements2=
@@ -258,7 +304,6 @@ function SlashCmdList.ProfessionBlacksmithing(msg, editbox)
  printMsgDebug("Opening Blacksmithing profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Blacksmithing))
  clearChatbox()
- ProfessionBlacksmithing()
 end
 
 -- ENCHANTING
@@ -268,7 +313,6 @@ function SlashCmdList.ProfessionEnchanting(msg, editbox)
  printMsgDebug("Opening Enchanting profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Enchanting))
  clearChatbox()
- ProfessionEnchantingy()
 end
 
 -- ENGINEERING
@@ -278,7 +322,6 @@ function SlashCmdList.ProfessionEngineering(msg, editbox)
  printMsgDebug("Opening Engineering profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Engineering))
  clearChatbox()
- ProfessionEngineering()
 end
 
 -- HERBALISM
@@ -288,7 +331,6 @@ function SlashCmdList.ProfessionHerbalism(msg, editbox)
  printMsgDebug("Opening Herbalism profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Herbalism))
  clearChatbox()
- ProfessionHerbalism()
 end
 
 -- INSCRIPTION
@@ -298,7 +340,6 @@ function SlashCmdList.ProfessionInscription(msg, editbox)
  printMsgDebug("Opening Inscription profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Inscription))
  clearChatbox()
- ProfessionInscription()
 end
 
 -- JEWELCRAFTING
@@ -308,7 +349,6 @@ function SlashCmdList.ProfessionJewelcrafting(msg, editbox)
  printMsgDebug("Opening Jewelcrafting profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Jewelcrafting))
  clearChatbox()
- ProfessionJewelcrafting()
 end
 
 -- LEATHERWORKING
@@ -318,7 +358,6 @@ function SlashCmdList.ProfessionLeathworking(msg, editbox)
  printMsgDebug("Opening Leathworking profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Leatherworking))
  clearChatbox()
- ProfessionLeathworking()
 end
 
 -- MINING
@@ -328,7 +367,6 @@ function SlashCmdList.ProfessionMining(msg, editbox)
  printMsgDebug("Opening Mining profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Mining))
  clearChatbox()
- ProfessionMining()
 end
 
 -- SKINNING
@@ -338,7 +376,6 @@ function SlashCmdList.ProfessionSkinning(msg, editbox)
  printMsgDebug("Opening Skinning profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Skinning))
  clearChatbox()
- ProfessionSkinning()
 end
 
 -- TAILORING
@@ -348,7 +385,6 @@ function SlashCmdList.ProfessionTailoring(msg, editbox)
  printMsgDebug("Opening Tailoring profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Tailoring))
  clearChatbox()
- ProfessionTailoring()
 end
 
 -- ALCHEMY
@@ -357,7 +393,6 @@ SLASH_ProfessionAlchemy1,SLASH_ProfessionAlchemy2,SLASH_ProfessionAlchemy3=
 function SlashCmdList.ProfessionAlchemy(msg, editbox)
  printMsgDebug("Opening Alchemy profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Alchemy))
- ProfessionAlchemy()
  clearChatbox()
 end
 
@@ -368,7 +403,6 @@ function SlashCmdList.ProfessionCooking(msg, editbox)
  printMsgDebug("Opening Cooking profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Cooking))
  clearChatbox()
- ProfessionCooking()
 end
 
 -- FISHING
@@ -378,7 +412,6 @@ function SlashCmdList.ProfessionFishing(msg, editbox)
  printMsgDebug("Opening Fishing profession.")
  C_TradeSkillUI.OpenTradeSkill(C_TradeSkillUI.GetProfessionSkillLineID(Enum.Profession.Fishing))
  clearChatbox()
- ProfessionFishing()
 end
 
 -- HEARTHSTONE
@@ -456,7 +489,7 @@ function SlashCmdList.UseGarrisonHearthstone(msg, editbox)
 end
 
 -- DALARAN HEARTHSTONE
-SLASH_UseGarrisonHearthstone1, SLASH_UseGarrisonHearthstone2, SLASH_UseGarrisonHearthstone3, SLASH_UseGarrisonHearthstone4=
+SLASH_UseDalaranHearthstone1, SLASH_UseDalaranHearthstone2, SLASH_UseDalaranHearthstone3, SLASH_UseDalaranHearthstone4=
 '/dalaranhearth', '/dalaran', '/dalaranhs', '/dalaranhearthstone'
 function SlashCmdList.UseDalaranHearthstone(msg, editbox)
     local dalaranHearthstoneID = 140192
